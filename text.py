@@ -1,0 +1,1 @@
+res = "%d Spread: ".format(1)

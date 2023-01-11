@@ -9,7 +9,7 @@ class Button:
     def start_btn(self):
         btn_start = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
 
-        btn_start.add("🇰🇿 Қазақ", "🇷🇺 Русская")
+        btn_start.add("💰 Биржа")
 
         return btn_start
 

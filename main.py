@@ -13,7 +13,13 @@ async def start_handler(message: types.Message):
 
     await bot.send_message(
         message.from_user.id,
-        text=start_text,
+        text="Сәлемтсіз бе " % message.from_user.first_name,
+        reply_markup=btn.start_btn()
+    )
+
+    await bot.send_message(
+        message.from_user.id,
+        text="Бұл телеграмм платформасында 💰 крипто биржаны бақылайтын уникалды бот. Қазір демо версияда.",
         reply_markup=btn.start_btn()
     )
 
