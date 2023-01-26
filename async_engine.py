@@ -3,21 +3,21 @@ from database import Database
 from load import bot, Dispatcher
 from pybit import usdt_perpetual
 from config import*
+from by import Trader
+from text import*
+import random
+from coins import*
 
-session_unauth = usdt_perpetual.HTTP(
-    endpoint="https://api-testnet.bybit.com"
-)
-
-
-r = session_unauth.public_trading_records(
-        symbol="BTCUSDT",
-        limit=10
-)
-
+trader = Trader()
 db = Database()
+coin = Coin()
+
 
 async def manager():
-    await bot.send_message(
-        admin_id,
-        text=r,
-    )
+    for i in db.fetch():
+        for c in coin.get_coin():
+            await bot.send_message(
+                i,
+                text=f'💰 Арбитраж пайдасы {c} ➡️ {coin.get_coin().index(c)+1}пайда: {random.random()}'
+            )
+    

@@ -13,12 +13,12 @@ import datetime
 btn = Button()
 db = Database()
 
-class FormaData(StatesGroup):
+class FormaDataRU(StatesGroup):
     calc = State()
     
 
-@dp.message_handler(state='*', commands='Бас тарту🙌🏻')
-@dp.message_handler(Text(equals='Бас тарту🙌🏻', ignore_case=True), state='*')
+@dp.message_handler(state='*', commands='Отмена🙌🏻')
+@dp.message_handler(Text(equals='Отмена🙌🏻', ignore_case=True), state='*')
 async def cancell_handler(message: types.Message, state: FSMContext):
     """
     :param message: Бастартылды
@@ -33,10 +33,10 @@ async def cancell_handler(message: types.Message, state: FSMContext):
 
     logging.info('Бас тарту!')
     await state.finish()
-    await message.reply('Бастартылды.', reply_markup=btn.menu_kz(db.check(message.from_user.id)))
+    await message.reply('Прекратитью', reply_markup=btn.menu_ru(db.check(message.from_user.id)))
 
 
-@dp.message_handler(state=FormaData.calc)
+@dp.message_handler(state=FormaDataRU.calc)
 async def calcHandler(message: types.Message, state: FSMContext):
     
     async with state.proxy() as data:
@@ -46,8 +46,8 @@ async def calcHandler(message: types.Message, state: FSMContext):
     db.insertDB(message.from_user.id, data['usdt'])
     await bot.send_message(
         message.from_user.id,
-        text="Сіздің сұранысыңыз арбитражға 👌🏻 сәтті қабылданды. Сұраныс ⚙️ Өңделу үстінде.",
-        reply_markup=btn.menu_kz(db.check(message.from_user.id))
+        text="Ваш запрос успешно принят в арбитраж 👌🏻. Заявка ⚙️ Обрабатывается.",
+        reply_markup=btn.menu_ru(db.check(message.from_user.id))
     )    
     
     await state.finish()
